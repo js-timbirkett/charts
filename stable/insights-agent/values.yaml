@@ -57,7 +57,7 @@ polaris:
   timeout: 300
   image:
     repository: quay.io/fairwinds/polaris
-    tag: "1.2"
+    tag: "3.0"
   resources:
     limits:
       cpu: 100m
@@ -279,6 +279,9 @@ prometheus:
     enabled: false
   server:
     fullnameOverride: "prometheus-server"
+    persistentVolume:
+      enabled: false
+    retention: "1d"
 
 admission:
   enabled: false
@@ -292,6 +295,9 @@ insights-admission:
     configmap:
       create: false
       suffix: 'configmap'
+  serviceAccount:
+    rbac:
+      grantRole: "view"
 
 # test -- Used for chart CI only - deploys a test deployment
 test:
